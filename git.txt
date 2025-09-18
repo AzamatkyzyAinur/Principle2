@@ -1,0 +1,144 @@
+Git-это система контроля версий, которая позволяет отслеживать изменения в вашем коде с течением времени.
+Репозиторий - это хранилищеб в котором расположен ваш проект и его история. Это может быть локальное хранилище где-то на вашем компьютере или удаленное хранилище на сервисе типа GitHub or in another hosting in the internet.
+Когда вы инициализируете репозиторий Гит в этой директории, Гит создает скрытую поддиректорию ".git" in which the all data about repository is saved.
+Commit- If it is not the fisrt commit, is does not collect all the files of repository. In real case it collect only information about last changes.
+Ветка- это паралельная версия репозитория. Ветки позволяет вам работать над отдельными функциями вашего проектаб не влияя на основную версию. закончив работу над новой фичей, вы можете обьеденитиь эту ветку с основной версией проекта.
+В репозиторий всегда есть по крайней мере одна ветка, даже если вы не создавали. It named main or master.
+
+1-chapter:
+Instal git then do the command:
+git config --global user.name "Your Name"
+git config --global user.email "Your email"
+
+You will use main to name of branch
+git confid --global init.defaultBranch main
+
+The correct remaiking to finish line
+git config --global core.autocrlf true
+git config --global core.safecrlf warn
+
+Chapter 2:
+Create hello.html
+Do this command for this:
+mkdir work поддиректорию ворк создание
+cd work  папка
+touch hello.html создание файла
+
+file: Hello, World.
+
+Create repository
+Write git init
+the result wil be: Initialized empty Git repository in /home/alex..../.git/
+
+git add hello.html
+git commit -m "Initial commit"
+
+you see the result: $git add hello.htnl
+$git commit -m "Initial commit"
+[main (root-commit 5836970) ] Initial commit
+
+Chapter 3:
+git status-to check the status of repository
+Chapter 4:
+by adding <h1> </h1> to hello.html you can check git status to understand how to work with i
+The result will be: n branch main and changes not stages to commit and some explaines what you should do after that
+git add- to add changes 
+git restore- to cancel changes
+
+Chapter 5:
+ git add hello.html
+git status
+
+Вы увидите:
+
+Результат
+$ git add hello.html
+$ git status
+On branch main
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   hello.html
+
+    Изменения файла hello.html были проиндексированы. Это означает, что Git теперь знает об изменении, но изменение пока не перманентно (читай, навсегда) записано в репозиторий. Следующий коммит будет включать в себя проиндексированные изменения.
+
+Если вы решили, что не хотите коммитить изменения, команда состояния напомнит вам о том, что с помощью команды git restore --staged можно снять индексацию этих изменений.
+
+Chapter 6:
+Предположим, что вы отредактировали три файла (a.html, b.html, и c.html). Теперь вы хотите закоммитить все изменения, при этом чтобы изменения в a.html и b.html были одним коммитом, в то время как изменения в c.html логически не связаны с первыми двумя файлами и должны идти отдельным коммитом.
+
+В теории, вы можете сделать следующее:
+
+git add a.html
+git add b.html
+git commit -m "Changes for a and b"
+git add c.html
+git commit -m "Unrelated change to c"
+Разделяя индексацию и коммит, вы имеете возможность с легкостью настроить, что идет в какой коммит.
+
+chapter 7: GIT_EDITOR - переменная среды
+core.editor - парвметр конфигурации 
+VISUAL - переменная среды
+Editor - переменная среды
+редакторы где можно редактировать изменения
+
+Chapter 8:
+Гит фокусируется на изменениях в файле, а не в самом файле. 
+Перед адд нужно утвердиться то, что все хорошо и лишних материвалов нет, после делать коммит.
+
+Chapter 9:
+Git log- получение списка произведенных изменений
+Давайте рассмотрим его в деталях:
+
+--pretty="..." — определяет формат вывода.
+%h — укороченный хеш коммита.
+%ad — дата коммита.
+| — просто визуальный разделитель.
+%s — комментарий.
+%d — дополнения коммита («головы» веток или теги).
+%an — имя автора.
+--date=short — сохраняет формат даты коротким и симпатичным.
+Таким образом, каждый раз, когда вы захотите посмотреть лог, вам придется много печатать. К счастью, существует несколько опций конфигурации Git, позволяющих настроить формат вывода истории по умолчанию:
+
+Выполните
+git config --global format.pretty '%h %ad | %s%d [%an]'
+git config --global log.date short
+
+Chapter 10: 
+Команда checkout обновит вашу рабочую директорию до любого предыдущего коммита.
+Многие команды Git принимают хеши коммитов в качестве аргументов. Хеши коммитов будут отличаться в разных репозиториях, поэтому когда вы видите, что в команде есть пометка <hash>, то это значит, что вам надо подставить вместо нее реальный хеш из вашего репозитория.
+Команда checkout в течение длительного времени была своеобразным швейцарским ножом в мире Git. Она имеет множество различных опций, которые позволяют выполнять совершенно разные вещи: переключать ветки, сбрасывать код и так далее. В какой-то момент команда Git решила разделить ее на несколько команд. Командаswitch является одной из них — ее единственным назначением является переключение между ветками. Команда checkout все еще доступна, но использовать ее для переключения веток больше не рекомендуется.
+
+Chapter 11:
+ Разве не было бы здорово, если бы вы могли обозначать конкретные коммиты понятными для человека названиями? Таким образом, вы могли бы четко видеть важные вехи в истории проекта. Кроме того, вы могли бы легко перейти к определенной версии проекта по ее названию. Именно для этого в Git придумали теги.
+
+Давайте назовем текущую версию страницы hello.html первой, то есть v1.
+
+Вы можете увидеть, какие теги доступны, используя команду git tag.
+
+Выполните
+git tag
+Результат
+$ git tag
+v1
+v1-beta
+Просмотр Тегов в логах
+Вы также можете посмотреть теги в логе.
+
+Выполните
+git log main --all
+Результат
+$ git log main --all
+b7614c1 2023-11-28 | Added HTML header (tag: v1, main) [Alexander Shvets]
+46afaff 2023-11-28 | Added standard HTML page tags (HEAD, tag: v1-beta) [Alexander Shvets]
+78433de 2023-11-28 | Added h1 tag [Alexander Shvets]
+5836970 2023-11-28 | Initial commit [Alexander Shvets]
+Вы можете видеть теги (v1 и v1-beta) в логе вместе с именем ветки (main). Кроме того, метка HEAD показывает коммит, на который вы переключились (на данный момент это v1-beta).
+
+Chapter 12:
+git swtich main- swtich branch
+ 
+restore- delete changes 
+
+Chapter 13:
+gir restore --staged clean index, but id does not change factorial daata in work stages
+git restore hello html - restore the data
