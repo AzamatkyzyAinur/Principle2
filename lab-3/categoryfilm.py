@@ -76,10 +76,5 @@ movies = [
 "category": "Romance"
 }
 ]
-
-
-def movies_by_category(movie_list, category_name):
-   return [m for m in movie_list if m["category"] == category_name]
-
-# Пример:
-print(movies_by_category(movies, "Romance"))
+def movies_by_category(movies, category):
+   return [movie for movie in movies if movie["category"] == category]

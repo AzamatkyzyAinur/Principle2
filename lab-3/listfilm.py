@@ -77,8 +77,5 @@ movies = [
 }
 ]
 
-def high_score_movies(movie_list):
-   return [m for m in movie_list if m["imdb"] > 5.5]
-
-# Пример:
-print(high_score_movies(movies))
+def movies_above_5_5(movies):
+   return [movie for movie in movies if movie["imdb"] > 5.5]

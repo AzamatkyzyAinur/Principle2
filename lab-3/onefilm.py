@@ -76,9 +76,5 @@ movies = [
 "category": "Romance"
 }
 ]
-
-def is_high_score(movie):
+def is_good_movie(movie):
    return movie["imdb"] > 5.5
-
-# Пример:
-print(is_high_score(movies[0]))  # True, т.к. 7.0 > 5.5

@@ -74,18 +74,9 @@ movies = [
 "name": "We Two",
 "imdb": 7.2,
 "category": "Romance"
-}
-]
-
-def average_imdb(movie_list):
-   if not movie_list:
+}]
+def average_imdb_by_category(movies, category):
+   filtered = [movie for movie in movies if movie["category"] == category]
+   if not filtered:
        return 0
-   return sum(m["imdb"] for m in movie_list) / len(movie_list)
-
-def average_imdb_by_category(movie_list, category_name):
-   category_movies = [m for m in movie_list if m["category"] == category_name]
-   return average_imdb(category_movies)
-
-# Пример:
-print("Average Romance:", average_imdb_by_category(movies, "Romance"))
-print("Average Thriller:", average_imdb_by_category(movies, "Thriller"))
+   return sum(movie["imdb"] for movie in filtered) / len(filtered)

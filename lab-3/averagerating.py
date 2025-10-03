@@ -77,10 +77,7 @@ movies = [
 }
 ]
 
-def average_imdb(movie_list):
-   if not movie_list:  # если список пустой
+def average_imdb(movies):
+   if not movies:
        return 0
-   return sum(m["imdb"] for m in movie_list) / len(movie_list)
-
-# Пример:
-print("Average IMDB (all movies):", average_imdb(movies))
+   return sum(movie["imdb"] for movie in movies) / len(movies)
