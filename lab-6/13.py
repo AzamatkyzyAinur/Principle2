@@ -1,6 +1,6 @@
 import os
 
-path = input("Введите путь к файлу для удаления: ")
+path = input("path do delete ")
 
 if os.path.exists(path):
     if os.access(path, os.W_OK):

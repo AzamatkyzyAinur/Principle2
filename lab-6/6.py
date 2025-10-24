@@ -1,6 +1,6 @@
 import os
 
-path = input("Enter the path: ")
+path = input("the path: ")
 
 print("Directories:")
 print([d for d in os.listdir(path) if os.path.isdir(os.path.join(path, d))])

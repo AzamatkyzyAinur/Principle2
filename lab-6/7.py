@@ -1,6 +1,6 @@
 import os
 
-path = input("Enter the path: ")
+path = input("the path: ")
 
 print( os.access(path, os.F_OK))
 print( os.access(path, os.R_OK))

@@ -1,7 +1,7 @@
 import shutil
 
-src = input("Введите имя исходного файла: ")
-dst = input("Введите имя файла назначения: ")
+src = input("ishodnik ")
+dst = input("name ")
 
 shutil.copyfile(src, dst)
 print("ctrlv&ctrlc is final")
