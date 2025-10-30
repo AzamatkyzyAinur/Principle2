@@ -3,10 +3,8 @@ import os
 
 pygame.init()
 pygame.mixer.init()
-
 screen = pygame.display.set_mode((900,300))
 pygame.display.set_caption("Apple music")
-
 path = os.listdir('c:\Principle2\lab-7')
 
 
@@ -14,26 +12,18 @@ playlist = []
 for music in path:
     if music.endswith(".mp3"):
         playlist.append(music)
-
-
 id=0
 os.chdir('C:\Principle2\lab-7')
 pygame.mixer.music.load(playlist[id])
 pygame.mixer.music.play()
 pygame.mixer.music.pause()
 
-
-
 clock = pygame.time.Clock()
-
-
 done = False
 play = False
 
-
 bg = pygame.image.load('C:/Principle2/lab-7/background.png')
 bg = pygame.transform.scale(bg, (900, 300))
-
 
 prev = pygame.image.load('C:\Principle2\lab-7\prev.png')
 playbt = pygame.image.load('C:\Principle2\lab-7\play.png')
@@ -47,17 +37,12 @@ stop = pygame.transform.scale(stop, (100, 120))
 next = pygame.transform.scale(next, (130, 130))
 
 while not done:
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-        
-
-        if event.type == pygame.KEYUP:
-
-
-            if event.key == pygame.K_RIGHT:
-                id+=1
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_RIGHT:
+                    id+=1
                 pygame.mixer.music.stop()
                 pygame.mixer.music.load(playlist[id])
                 print("Curently playing: ", playlist[id])
@@ -78,9 +63,6 @@ while not done:
 
     font = pygame.font.SysFont(None, 24)     
     text = font.render('Currently playing:   ' + playlist[id][:-4], True, 'WHITE')
-
-   
-
     screen.blit(bg, (0, 0))
     screen.blit(text, (200,100))
     screen.blit(prev, (150,160))
