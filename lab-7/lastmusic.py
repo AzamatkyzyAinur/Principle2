@@ -44,21 +44,19 @@ while not done:
 
         if event.type == pygame.KEYUP:
 
-            # ▶️ Следующий трек
             if event.key == pygame.K_RIGHT:
                 id += 1
-                if id >= len(playlist):  # если дошли до конца — начать сначала
+                if id >= len(playlist): 
                     id = 0
                 pygame.mixer.music.stop()
                 pygame.mixer.music.load(playlist[id])
                 print("Currently playing:", playlist[id])
                 pygame.mixer.music.play()
                 play = True
-
-            # ⏮️ Предыдущий трек
+                
             if event.key == pygame.K_LEFT:
                 id -= 1
-                if id < 0:  # если ушли в начало — перейти к последнему
+                if id < 0: 
                     id = len(playlist) - 1
                 pygame.mixer.music.stop()
                 pygame.mixer.music.load(playlist[id])
@@ -66,7 +64,6 @@ while not done:
                 pygame.mixer.music.play()
                 play = True
 
-            # ⏯️ Пауза / Возобновление
             if not play and event.key == pygame.K_SPACE:
                 play = True
                 pygame.mixer.music.unpause()
