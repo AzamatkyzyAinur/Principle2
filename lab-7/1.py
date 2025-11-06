@@ -5,7 +5,6 @@ x = W//2
 y = H//2
 WHITE = (255, 255, 255)
 sc = pygame.display.set_mode((W, H))
-clock = pygame.time.Clock()
 mickey = pygame.image.load(r"C:\Principle2\lab-7\main-clock.png")
 leftHand = pygame.image.load(r"C:\Principle2\lab-7\left-hand.png")
 rightHand = pygame.image.load(r"C:\Principle2\lab-7\right-hand.png")
@@ -22,12 +21,10 @@ while True:
         if event.type == pygame.QUIT:
             exit()
     langle -= 0.6
-    rangle -= 0.05
-    
+    rangle -= 0.05 
     sc.fill(WHITE)
     sc.blit(mickey, (x, y))
     sc.blit(mickey, mickeyRect)
     blitRotateCenter(sc, rightHand, (x,y), rangle)
     blitRotateCenter(sc, leftHand, (x,y), langle) 
-    
     pygame.display.update()
