@@ -1,13 +1,13 @@
 import pygame
 import sys
 import random
-import pygame_menu 
+import pygame_menu
 
 
 pygame.init()
-#resources, colors etc
-background = pygame.image.load('snake.png')
 
+background = pygame.image.load('snake.png')
+#colors and variables 
 SIZE_BLOCK = 20
 WHITE = (255, 255, 255)
 FRAME_COLOR = (0, 255, 204)
@@ -18,32 +18,32 @@ BLUE = (204,255,255)
 RED = (224, 0, 0)
 MARGIN = 1
 HEADER_MARGIN = 70
-#size_block -размер клетки в пикселях, каунт блоккс- количество клеток по горизонтали/вертикали, марджин-расстояние между клетками в пикселях, хидер марджин-заголовк
+#размер скрина, таймер шрифт и тд
 size = [SIZE_BLOCK*COUNT_BLOCKS+2*SIZE_BLOCK+MARGIN*COUNT_BLOCKS,SIZE_BLOCK*COUNT_BLOCKS+2*SIZE_BLOCK+MARGIN*COUNT_BLOCKS+HEADER_MARGIN]
 screen = pygame.display.set_mode(size)
 timer = pygame.time.Clock()
 courier = pygame.font.SysFont('courier', 36, 1)
 
-#snake apple position coordinate=ion 
+#sturctue to save the posotion of the snake
 class SnakeBlock:
     def __init__(self, x, y):
         self.x = x
         self.y = y
     
-    def is_inside(self):
+    def is_inside(self): #helt to check if the block is inside playgame screen
         return 0<=self.x<COUNT_BLOCKS and 0<=self.y<COUNT_BLOCKS
     
-    def __eq__(self, other):
+    def __eq__(self, other): 
         return isinstance(other, SnakeBlock) and self.x == other.x and self.y == other.y
 
-#kletka draw, tipo shahmat poryadak
+# kletka sizes, in coordinates
 
 def draw_block(color, row, column):
-    pygame.draw.rect(screen, color, [SIZE_BLOCK+column*SIZE_BLOCK + MARGIN*(column),HEADER_MARGIN+SIZE_BLOCK+row*SIZE_BLOCK + MARGIN*(row), SIZE_BLOCK, SIZE_BLOCK])
+    pygame.draw.rect(screen, color, [SIZE_BLOCK+column*SIZE_BLOCK + MARGIN*(column), HEADER_MARGIN+SIZE_BLOCK+row*SIZE_BLOCK + MARGIN*(row), SIZE_BLOCK, SIZE_BLOCK])
 
-
+# snake block apperared in random position and check the empty kletka to create aplle 
 def start_the_game():
-#snake will be appeared in random location and check to generate apple position 
+
     def get_random_empty_block():
         x = random.randint(0, COUNT_BLOCKS-1)
         y = random.randint(0, COUNT_BLOCKS-1)
@@ -56,15 +56,15 @@ def start_the_game():
 
     snake_blocks = [SnakeBlock(9,9), SnakeBlock(9, 10), SnakeBlock(9, 11)]
     apple = get_random_empty_block()
-
+# amout of variables
     d_row = 0
     d_col = 1
     total = 0
     speed = 1
 
     while True:
-        #klavishi how to play with snake, и алдын алу 180 градуска сразу бурылмас ушин
-        for event in pygame.event.get():
+        
+        for event in pygame.event.get():#to how to play with keyboaard 
             if event.type == pygame.QUIT:
                 print('exit')
                 pygame.quit()
@@ -83,14 +83,14 @@ def start_the_game():
                     d_row = 0
                     d_col = -1
 
-        screen.fill(FRAME_COLOR)
+        screen.fill(FRAME_COLOR) #risuet on the gorund frame and panel, and shareed total apple and speed counts
         pygame.draw.rect(screen, HEADER_COLOR, [0, 0, size[0], HEADER_MARGIN])
-#panel zhogaryda with speed and total score
+
         text_total = courier.render(f"Total: {total}", 1, WHITE)
         text_speed = courier.render(f"Speed: {speed}", 1, WHITE)
         screen.blit(text_total, (SIZE_BLOCK, SIZE_BLOCK))
         screen.blit(text_speed, (SIZE_BLOCK+230, SIZE_BLOCK))
-
+#shahmat for playgame background 
         for row in range(COUNT_BLOCKS):
             for column in range(COUNT_BLOCKS):
 
@@ -100,26 +100,26 @@ def start_the_game():
                     color = WHITE 
 
                 draw_block(color, row, column)
-#голова змеи если стенамен согысса сразу ойын битеди
+# to check snake head and when it is outside the game is off
         head = snake_blocks[-1]
         if not head.is_inside():
             print('crash')
             break
             # pygame.quit()
             # sys.exit()
-#draw apple and snake with red and green
-        draw_block(RED, apple.x, apple.y)
+
+        draw_block(RED, apple.x, apple.y) #draw snake and apple
         for block in snake_blocks:
             # x, y = block
             draw_block(SNAKE_COLOR, block.x, block.y)
-#every eaten 3 apple is increased spped to 1
-        if apple == head: 
+
+        if apple == head:  # check if apple ate
             total+=1
             speed = total//3 + 1
             snake_blocks.append(apple)
             apple = get_random_empty_block()
-       #so new head 
-        new_head = SnakeBlock(head.x + d_row, head.y + d_col)
+        
+        new_head = SnakeBlock(head.x + d_row, head.y + d_col) # new head
 
 
         if new_head in snake_blocks:
@@ -132,11 +132,7 @@ def start_the_game():
         pygame.display.flip()
         timer.tick(3+speed)
 
-
-
-
-
-menu = pygame_menu.Menu('Snake', 400, 300, theme=pygame_menu.themes.THEME_GREEN.set_background_color_opacity(1))
+menu = pygame_menu.Menu('Snake', 400, 300, theme=pygame_menu.themes.THEME_GREEN.set_background_color_opacity(1))#pygame menu 
 
 menu.add.text_input('Name :', default='Player 1')
 menu.add.button('Play', start_the_game)
